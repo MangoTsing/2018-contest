@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2048</title>
+</head>
+<style>
+	body{
+		margin:0;
+		padding: 0;
+	}
+	#container2{
+		display: flex;
+		flex-direction: row;
+		height: 306px;
+		width: 306px;
+		opacity: 0.5;
+		background: #50fc1a;
+		flex-wrap:wrap;
+		justify-content: center;
+		/*outline: 0 none;*/
+	}
+	.item{
+		height: 100px;
+		width:100px;
+		border: 1px solid yellow;
+		background: blue;
+		align-items:flex-start;
+		cursor: pointer;
+	}
+	.item1{
+		height: 100px;
+		width:100px;
+		border: 1px solid yellow;
+		background: yellow;
+		align-items:flex-start;
+		cursor: pointer;
+	}
+</style>
+<body>
+	<main>
+	<button id="btn">3*3</button>
+	<button id="btn1">4*4</button>
+	<button>5*5</button>
+		<div class="main">
+			<div class="container2" id="container2">
+            
+        	</div>
+		</div>
+	</main>
+</body>
+<script>
+
+var oDiv=document.getElementById('container2');
+var oBtn=document.getElementById('btn');
+var oBtn1=document.getElementById('btn1');
+function handel(){
+
+	
+	for(var i=0;i<9;i++){
+		oDiv.innerHTML+="<div class='item'></div>"
+	}
+	var oDivs=document.getElementsByClassName('item');
+	let num=Math.round(Math.random()*8);//做两个随机数，用于第一次点击按钮
+	let num0=Math.round(Math.random()*7);//*7因为有9个元素块,最大参数8，用了一个还剩7
+	oDivs[num].className='item1';
+	oDivs[num0].className='item1';
+	//更改class
+	
+	var oDivm=document.getElementsByClassName('item1');
+	//获取更改后的元素
+	// console.log(num1);
+	for(let i=0;i<2;i++){
+		let num1=Math.round(Math.random());//第一次数字为2或4
+		if(num1){
+		oDivm[i].innerHTML=2;
+		}else{
+			oDivm[i].innerHTML=4;
+		}
+	}//为更改后的元素增加数字
+	
+	oBtn.removeEventListener('click',handel,false);
+
+}
+oBtn.addEventListener('click',handel,false);
+
+function Logic(event){
+
+       var e = event || window.event;
+       var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+       var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+       var x = e.pageX || e.clientX + scrollX;
+       var y = e.pageY || e.clientY + scrollY;
+       //alert('x: ' + x + '\ny: ' + y);
+       console.log('x'+x+'y'+y);
+       return false;
+
+}
+oDiv.addEventListener('mousedown',Logic,false);
+oDiv.addEventListener('mouseup',Logic,false);
+
+</script>
+</html>
