@@ -145,64 +145,8 @@ function LogicDown(event){
 		       var x1 = e.pageX || e.clientX + scrollX;
 		       var y1 = e.pageY || e.clientY + scrollY;
 		       if(Math.abs(x-x1)>Math.abs(y-y1)&&(x-x1)<0){
-		       	
-		       	var oDivm=document.getElementsByClassName('item1');
-		       	var oDivs=document.getElementsByClassName('item');
-		       		for(let i=0;i<oDivs.length;i++){
-		       			if(oDivs[i].classList.contains('item1')==true){
-		       				
-		       				if(i=='1'||i=='4'||i=='7'){
-		       					// console.log(oDivs[i+1].innerHTML);
-		       					if(oDivs[i+1].innerHTML==oDivs[i].innerHTML){//判断中间块的加法
-		       						oDivs[i+1].innerHTML=oDivs[i].innerHTML*2;
-		       						let oNum=oDivs[i+1].innerHTML;
-		       						console.log(oNum);
-		       						oDivs[i].classList.remove('item1');
-					       			oDivs[i].classList.remove('item4');
-					       			oDivs[i+1].classList.remove('item1');
-					       			oDivs[i+1].classList.remove('item4');
-		       						if(oNum=='2'||oNum=='8'){
-					       				oDivs[i+1].className='item item1';
-		       						}else if(oNum=='4'||oNum=='16'){
-					       				oDivs[i+1].className='item item4';
-		       						}
-		       					}
-		       					//重复class报错
-		       				}else if(i=='2'||i=='5'||i=='8'){
-		       				console.log('最右侧');
-		       				}else if(i=='0'||i=='3'||i=='6'){
-
-		       					if(oDivs[i+1].innerHTML==oDivs[i].innerHTML){//判断最左边块的加法
-		       						oDivs[i+1].innerHTML=oDivs[i].innerHTML*2;
-		       						let oNum=oDivs[i+1].innerHTML;
-		       						console.log(oNum);
-		       						oDivs[i].classList.remove('item1');
-					       			oDivs[i].classList.remove('item4');
-					       			oDivs[i+1].classList.remove('item1');
-					       			oDivs[i+1].classList.remove('item4');
-		       						if(oNum=='2'||oNum=='8'){
-					       				oDivs[i+1].className='item item1';
-		       						}else if(oNum=='4'||oNum=='16'){
-					       				oDivs[i+1].className='item item4';
-		       						}
-		       					}else if(oDivs[i+2].innerHTML==oDivs[i].innerHTML&&!oDivs[i+1].innerHTML){
-		       						oDivs[i+2].innerHTML=oDivs[i].innerHTML*2;
-		       						let oNum=oDivs[i+2].innerHTML;
-		       						console.log(oNum);
-		       						oDivs[i].classList.remove('item1');
-					       			oDivs[i].classList.remove('item4');
-					       			oDivs[i+2].classList.remove('item1');
-					       			oDivs[i+2].classList.remove('item4');
-		       						if(oNum=='2'||oNum=='8'){
-					       				oDivs[i+2].className='item item1';
-		       						}else if(oNum=='4'||oNum=='16'){
-					       				oDivs[i+2].className='item item4';
-		       						}
-		       					}
-
-		       				}
-		       			}
-		       		}//以上右滑
+		       		moveRight();
+		       //以上右滑
 		       }else if(Math.abs(x-x1)>Math.abs(y-y1)&&(x-x1)>0){
 		       		var oDivm=document.getElementsByClassName('item1');
 		       		var oDivs=document.getElementsByClassName('item');
@@ -267,6 +211,176 @@ function LogicDown(event){
 		       }
 		};
 }
+function moveRight(){	
+				var oDivm=document.getElementsByClassName('item1');
+		       	var oDivs=document.getElementsByClassName('item');
+		       	var switch1=false;
+		       		for(let i=0;i<oDivs.length;i++){
+		       			if(oDivs[i].classList.contains('item1')==true){
+		       				
+		       				if(i=='1'||i=='4'||i=='7'){
+		       					if(oDivs[i+1].innerHTML==oDivs[i].innerHTML&&oDivs[i].innerHTML){//判断中间块的加法
+		       						//中间有块，右侧有块，且相等
+		       						oDivs[i+1].innerHTML=oDivs[i].innerHTML*2;
+		       						let oNum=oDivs[i+1].innerHTML;
+		       						console.log(oNum);
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			oDivs[i+1].classList.remove('item1');
+					       			oDivs[i+1].classList.remove('item4');
+		       						if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+1].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+1].className='item item4';
+		       						}
+		       						oDivs[i].innerHTML='';
+		       						switch1=true;
+		       					}else if(oDivs[i].innerHTML&&!oDivs[i+1].innerHTML){
+		       						oDivs[i+1].innerHTML=oDivs[i].innerHTML;
+		       						let oNum=oDivs[i+1].innerHTML;
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			oDivs[i+1].classList.remove('item1');
+					       			oDivs[i+1].classList.remove('item4');
+					       			if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+1].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+1].className='item item4';
+		       						}
+		       						oDivs[i].innerHTML='';
+		       						switch1=true;
+		       					}
 
+		       					//重复class报错
+		       				}else if(i=='2'||i=='5'||i=='8'){
+		       				console.log('最右侧');
+		       				}else if(i=='0'||i=='3'||i=='6'){
+
+		       					if(oDivs[i+1].innerHTML==oDivs[i].innerHTML){//左侧有块，中间有块,并且相等
+		       						
+		       						if(oDivs[i+2].innerHTML){
+		       							oDivs[i+1].innerHTML=oDivs[i].innerHTML*2;
+		       							let oNum=oDivs[i+1].innerHTML;
+		       							oDivs[i].classList.remove('item1');
+						       			oDivs[i].classList.remove('item4');
+						       			oDivs[i+1].classList.remove('item1');
+						       			oDivs[i+1].classList.remove('item4');
+			       						if(oNum=='2'||oNum=='8'){
+						       				oDivs[i+1].className='item item1';
+			       						}else if(oNum=='4'||oNum=='16'){
+						       				oDivs[i+1].className='item item4';
+			       						}switch1=true;
+		       						}else if(!oDivs[i+2].innerHTML){
+		       							oDivs[i+2].innerHTML=oDivs[i].innerHTML*2;
+		       							let oNum=oDivs[i+2].innerHTML;
+		       							oDivs[i].classList.remove('item1');
+						       			oDivs[i].classList.remove('item4');
+						       			oDivs[i+1].classList.remove('item1');
+						       			oDivs[i+1].classList.remove('item4');
+			       						if(oNum=='2'||oNum=='8'){
+						       				oDivs[i+2].className='item item1';
+			       						}else if(oNum=='4'||oNum=='16'){
+						       				oDivs[i+2].className='item item4';
+			       						}switch1=true;
+		       						}
+		       					}else if(oDivs[i+2].innerHTML==oDivs[i].innerHTML&&!oDivs[i+1].innerHTML){
+		       						//左右有块相等，中间为空
+		       						oDivs[i+2].innerHTML=oDivs[i].innerHTML*2;
+		       						let oNum=oDivs[i+2].innerHTML;
+		       						console.log(oNum);
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			oDivs[i+2].classList.remove('item1');
+					       			oDivs[i+2].classList.remove('item4');
+		       						if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+2].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+2].className='item item4';
+		       						}switch1=true;
+		       					}else if(oDivs[i+2].innerHTML!==oDivs[i].innerHTML&&oDivs[i+2].innerHTML&&oDivs[i].innerHTML&&!oDivs[i+1].innerHTML){//左右不相等，左右不为空,中间为空
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			console.log('3');
+					       			let oNum=oDivs[i].innerHTML;
+					       			if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+1].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+1].className='item item4';
+		       						}
+					       			oDivs[i+1].innerHTML=oDivs[i].innerHTML;
+					       			oDivs[i].innerHTML='';
+					       			switch1=true;
+		       					}else if(!oDivs[i+2].innerHTML&&!oDivs[i+1].innerHTML&&oDivs[i].innerHTML){//右边空，中间空，左边有值
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			console.log('4');
+					       			let oNum=oDivs[i].innerHTML;
+					       			if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+2].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+2].className='item item4';
+		       						}
+		       						oDivs[i+2].innerHTML=oDivs[i].innerHTML;
+					       			oDivs[i].innerHTML='';
+					       			switch1=true;
+		       					}else if(!oDivs[i+2].innerHTML&&oDivs[i].innerHTML!==oDivs[i+1].innerHTML&&oDivs[i].innerHTML&&oDivs[i+1].innerHTML){//左中不相等，右为空
+		       						oDivs[i].classList.remove('item1');
+					       			oDivs[i].classList.remove('item4');
+					       			oDivs[i+1].classList.remove('item1');
+					       			oDivs[i+1].classList.remove('item4');
+					       			console.log('5');
+					       			let oNum=oDivs[i].innerHTML;
+					       			let oNum1=oDivs[i+1].innerHTML;
+					       			oDivs[i].innerHTML='';
+					       			oDivs[i+1].innerHTML='';
+					       			if(oNum=='2'||oNum=='8'){
+					       				oDivs[i+1].className='item item1';
+		       						}else if(oNum=='4'||oNum=='16'){
+					       				oDivs[i+1].className='item item4';
+		       						}
+		       						oDivs[i+1].innerHTML=oNum;
+		       						
+		       						if(oNum1=='2'||oNum1=='8'){
+					       				oDivs[i+2].className='item item1';
+		       						}else if(oNum1=='4'||oNum1=='16'){
+					       				oDivs[i+2].className='item item4';
+		       						}
+		       						oDivs[i+2].innerHTML=oNum1;
+		       						switch1=true;
+		       					}
+
+		       				}
+		       			}
+		       		}
+			    if(switch1){//判断是否增加块块
+			       	let nowArr=[];
+				       	for(let i=0;i<oDivs.length;i++){
+				       		if(oDivs[i].className==='item'){
+				       			nowArr.push(i);
+				       		}
+				       	}
+				    let num=Math.round(Math.random()*nowArr.length-1);
+				    //console.log(nowArr.in_array());
+				    while(!nowArr.in_array(num)){
+				    	num=Math.round(Math.random()*nowArr.length-1);
+				    	if(num){
+				    		num=0;
+				    	}
+				    }
+				    oDivs[num].classList.add('item1');
+				    let num1=Math.round(Math.random());
+				    if(num1){
+				    	oDivs[num].innerHTML=2;
+				    }else{
+				    	oDivs[num].innerHTML=4;
+				    	oDivs[num].classList.add('item4');
+				    }
+				}
+
+		    }
+Array.prototype.in_array=function(e){
+　　var r=new RegExp(','+e+',');  
+　　return (r.test(','+this.join(this.S)+','));  
+};  //array方法，判断是否存在某字符
 </script>
 </html>
