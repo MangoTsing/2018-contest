@@ -1,3 +1,7 @@
+/*
+	author:sgyp 18/4/22
+*/
+
 var sgypGame = {
 	start: function() {
 		this.data = new Array();
