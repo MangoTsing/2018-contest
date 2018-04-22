@@ -338,5 +338,8 @@ document.getElementById('btn').addEventListener('click', function() {
 	sgypGame.score=0;
 	sgypGame.state=1;
 	sgypGame.data=null;
+	document.getElementById("gameover").style.display = "none";
+	document.getElementById("final").style.display='none'
+	document.getElementById('container').style.display = "flex";
 	sgypGame.start();
 });
