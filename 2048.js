@@ -329,5 +329,10 @@ var sgypGame = {
 }
 sgypGame.start();
 document.getElementById('btn').addEventListener('click', function() {
+	sgypGame.Heng=4;
+	sgypGame.Shu=4;
+	sgypGame.score=0;
+	sgypGame.state=1;
+	sgypGame.data=null;
 	sgypGame.start();
 });
